@@ -5,19 +5,43 @@
 using System;
 
 class Program
-{static void Main(string[] args)
+{
+
+    static void Main(string[] args)
     {
         Console.WriteLine("Введите строки через запятую:");
-        string input = Console.ReadLine();
+        string input = Console.ReadLine()!;
         string[] inputStrings = input.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-        
-        string[] result = FilterShortStrings(inputStrings);
 
+        string[] result = FilterShortStrings(inputStrings);
         Console.WriteLine("Результат:");
         foreach (string str in result)
         {
-            Console.WriteLine(str);
+            Console.Write(str + ", ");
         }
     }
-    
+    static string[] FilterShortStrings(string[] strings)
+    {
+        int count = 0;
+        foreach (string str in strings)
+        {
+            if (str.Length <= 3)
+            {
+                count++;
+            }
+        }
+        string[] filteredStrings = new string[count];
+        int index = 0;
+        foreach (string str in strings)
+        {
+            if (str.Length <= 3)
+            {
+                filteredStrings[index] = str;
+                index++;
+            }
+        }
+
+        return filteredStrings;
+    }
+
 }
